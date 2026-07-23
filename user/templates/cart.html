@@ -1,0 +1,287 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+
+<div style="max-width:1000px;margin:auto;">
+
+    <!-- Header -->
+    <div style="
+        background:#198754;
+        color:white;
+        padding:20px 30px;
+        border-radius:15px 15px 0 0;
+    ">
+        <h2 style="margin:0;">
+            🛒 ตะกร้าสินค้า
+        </h2>
+    </div>
+
+    <div style="
+        background:white;
+        padding:30px;
+        border-radius:0 0 15px 15px;
+        box-shadow:0 8px 20px rgba(0,0,0,.08);
+    ">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if cart_items %}
+
+            {% for item in cart_items %}
+
+            <div style="
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                gap:20px;
+                padding:20px 0;
+                border-bottom:1px solid #e5e5e5;
+            ">
+
+                <!-- รูปสินค้า -->
+                <div>
+
+                    {% if item.product.image %}
+
+                    <img src="{{ item.product.image.url }}"
+                         style="
+                            width:90px;
+                            height:90px;
+                            object-fit:cover;
+                            border-radius:10px;
+                         ">
+
+                    {% else %}
+
+                    <div style="
+                        width:90px;
+                        height:90px;
+                        background:#eee;
+                        border-radius:10px;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                    ">
+                        No Image
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- รายละเอียด -->
+                <div style="flex:1;">
+
+                    <h4 style="margin-bottom:8px;">
+                        {{ item.product.product_name }}
+                    </h4>
+
+                    <p style="margin:0;color:#666;">
+                        ราคา :
+                        <b style="color:#198754;">
+                            ฿{{ item.product.sell_price }}
+                        </b>
+                    </p>
+
+                </div>
+
+                <!-- จำนวน -->
+                <div>
+
+                  <div style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                    ">
+
+                    <!-- ปุ่มลด -->
+                    <a href="{% url 'decrease_quantity' item.id %}"
+                    style="
+                            width:40px;
+                            height:40px;
+                            border-radius:50%;
+                            background:#dc3545;
+                            color:white;
+                            text-decoration:none;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                            font-size:22px;
+                            font-weight:bold;
+                            transition:.3s;
+                    "
+                    onmouseover="this.style.background='#bb2d3b'"
+                    onmouseout="this.style.background='#dc3545'">
+                        −
+                    </a>
+
+                    <!-- จำนวน -->
+                    <span style="
+                        min-width:45px;
+                        text-align:center;
+                        font-size:20px;
+                        font-weight:bold;
+                        background:#f5f5f5;
+                        padding:8px 15px;
+                        border-radius:10px;
+                    ">
+                        {{ item.quantity }}
+                    </span>
+
+                    <!-- ปุ่มเพิ่ม -->
+                        <a href="{% url 'increase_quantity' item.id %}"
+                        style="
+                            width:40px;
+                            height:40px;
+                            border-radius:50%;
+                            background:#198754;
+                            color:white;
+                            text-decoration:none;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                            font-size:22px;
+                            font-weight:bold;
+                            transition:.3s;
+                        "
+                        onmouseover="this.style.background='#157347'"
+                        onmouseout="this.style.background='#198754'">
+                            +
+                    </a>
+
+                </div>
+
+                </div>
+
+                <!-- ราคารวม -->
+               <div style="
+                    width:130px;
+                    text-align:right;
+                ">
+
+                    <div style="font-size:14px;color:#666;">
+                        รวม
+                    </div>
+
+                    <div style="
+                        color:#198754;
+                        font-size:22px;
+                        font-weight:bold;
+                    ">
+                        ฿{{ item.total_price|floatformat:2 }}
+                    </div>
+
+                </div>
+
+                <!-- ลบ -->
+                <div>
+
+                   <a href="{% url 'remove_from_cart' item.id %}"
+                    style="
+                            background:#dc3545;
+                            color:white;
+                            padding:10px 18px;
+                            border-radius:10px;
+                            text-decoration:none;
+                            font-weight:bold;
+                            display:inline-flex;
+                            align-items:center;
+                            gap:8px;
+                            transition:.3s;
+                            "
+                            onmouseover="this.style.background='#bb2d3b'"
+                            onmouseout="this.style.background='#dc3545'">
+
+                        🗑 ลบ
+
+                    </a>
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+            <!-- Total -->
+
+            <div style="
+                background:#198754;
+                color:white;
+                padding:20px;
+                border-radius:10px;
+                margin-top:30px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            ">
+
+                <h4 style="margin:0;">
+                    ราคารวมทั้งหมด
+                </h4>
+
+                <h3 style="margin:0;">
+                    ฿{{ total_price|floatformat:2 }}
+                </h3>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                margin-top:25px;
+            ">
+
+                <a href="{% url 'home' %}"
+                   class="btn btn-secondary">
+
+                    กลับ
+
+                </a>
+
+                <a href="{% url 'checkout' %}"
+                   class="btn btn-success">
+
+                    ชำระเงิน 
+
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <div style="
+                text-align:center;
+                padding:60px;
+            ">
+
+                <h1>🛒</h1>
+
+                <h3>ยังไม่มีสินค้าในตะกร้า</h3>
+
+                <p style="color:#666;">
+                    ไปเลือกสินค้ากันเลย
+                </p>
+
+                <a href="{% url 'home' %}"
+                   class="btn btn-success">
+
+                    เลือกซื้อสินค้า
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

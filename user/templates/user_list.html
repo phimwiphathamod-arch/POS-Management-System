@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="
+    max-width:1100px;
+    margin:40px auto;
+    font-family:Arial, sans-serif;
+">
+
+    <!-- Header -->
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+    ">
+        <h1 style="
+            font-size:28px;
+            color:#2c3e50;
+            margin:0;
+        ">
+            👤 Users Management
+        </h1>
+
+        <span style="
+            background:#2575fc;
+            color:white;
+            padding:8px 16px;
+            border-radius:20px;
+            font-size:14px;
+        ">
+            Total: {{ users|length }}
+        </span>
+    </div>
+
+    <!-- Card -->
+    <div style="
+        background:white;
+        border-radius:16px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        overflow:hidden;
+    ">
+
+        <!-- Table -->
+        <table style="
+            width:100%;
+            border-collapse:collapse;
+        ">
+
+            <!-- Head -->
+            <thead>
+                <tr style="
+                    background:linear-gradient(90deg,#2575fc,#6a11cb);
+                    color:white;
+                    text-align:left;
+                ">
+                    <th style="padding:14px;">ID</th>
+                    <th style="padding:14px;">Username</th>
+                    <th style="padding:14px;">Email</th>
+                    <th style="padding:14px;">Role</th>
+                </tr>
+            </thead>
+
+            <!-- Body -->
+            <tbody>
+                {% for user in users %}
+                <tr style="
+                    transition:0.2s;
+                "
+                onmouseover="this.style.background='#f5f7ff'"
+                onmouseout="this.style.background='white'"
+                >
+
+                    <td style="padding:14px;border-bottom:1px solid #eee;">
+                        {{ user.id }}
+                    </td>
+
+                    <td style="padding:14px;border-bottom:1px solid #eee;font-weight:600;color:#2c3e50;">
+                        {{ user.username }}
+                    </td>
+
+                    <td style="padding:14px;border-bottom:1px solid #eee;color:#555;">
+                        {{ user.email }}
+                    </td>
+
+                    <td style="padding:14px;border-bottom:1px solid #eee;">
+                        <span style="
+                            padding:5px 12px;
+                            border-radius:20px;
+                            font-size:12px;
+                            background:#e3f2fd;
+                            color:#1976d2;
+                            font-weight:600;
+                        ">
+                            {{ user.users_role }}
+                        </span>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

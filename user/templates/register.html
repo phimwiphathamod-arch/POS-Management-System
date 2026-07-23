@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+
+    <style>
+
+            *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+            padding:30px;
+        }
+
+        .register-container{
+
+            width:100%;
+            max-width:650px;
+
+            background:white;
+
+            padding:40px;
+
+            border-radius:20px;
+
+            box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+        }
+
+        .logo{
+
+            text-align:center;
+            margin-bottom:10px;
+            font-size:45px;
+
+        }
+
+        .register-container h2{
+
+            text-align:center;
+            margin-bottom:5px;
+            color:#333;
+
+        }
+
+        .subtitle{
+
+            text-align:center;
+            color:#777;
+            margin-bottom:35px;
+
+        }
+
+        .row{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:20px;
+
+        }
+
+        .form-control{
+
+            margin-bottom:20px;
+
+        }
+
+        .form-control label{
+
+            display:block;
+
+            margin-bottom:8px;
+
+            font-weight:bold;
+
+        }
+
+        .required{
+
+            color:red;
+
+        }
+
+        .form-control input,
+        .form-control textarea{
+
+            width:100%;
+
+            padding:13px;
+
+            border:1px solid #ddd;
+
+            border-radius:10px;
+
+            outline:none;
+
+            font-size:15px;
+
+            transition:.3s;
+
+        }
+
+        .form-control input:focus,
+        .form-control textarea:focus{
+
+            border-color:#ff758c;
+
+            box-shadow:0 0 10px rgba(255,117,140,.25);
+
+        }
+
+        .register-btn{
+
+            width:100%;
+
+            padding:15px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:#ff758c;
+
+            color:white;
+
+            font-size:17px;
+
+            cursor:pointer;
+
+            transition:.3s;
+
+        }
+
+        .register-btn:hover{
+
+            background:#ff4f73;
+
+        }
+
+        .login-link{
+
+            margin-top:25px;
+
+            text-align:center;
+
+        }
+
+        .login-link a{
+
+            color:#ff4f73;
+
+            font-weight:bold;
+
+            text-decoration:none;
+
+        }
+
+        .errorlist{
+
+            color:red;
+
+            margin-top:5px;
+
+            font-size:14px;
+
+            list-style:none;
+
+            padding:0;
+
+        }
+
+        @media(max-width:768px){
+
+        .row{
+
+        grid-template-columns:1fr;
+
+        }
+
+        .register-container{
+
+        padding:30px;
+
+        }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <h2>
+            สมัครสมาชิก
+        </h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% for field in form %}
+
+                <div class="form-control">
+
+                    <label>
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.errors %}
+
+                        <span style="color:red;">*</span>
+                            {{ field.errors }}
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            <button
+                type="submit"
+                class="register-btn"
+            >
+                สมัครสมาชิก
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            <a href="/login/">
+                มีบัญชีอยู่แล้ว? Login
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>
+    Dashboard
+</h1>
+
+<br>
+
+<div style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+">
+
+    <div style="
+        background:white;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    ">
+
+        <h3>
+            📦 Products
+        </h3>
+
+        <h1>
+            {{product_count}}
+        </h1>
+
+    </div>
+
+    <div style="
+        background:white;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    ">
+
+        <h3>
+            📂 Categories
+        </h3>
+
+        <h1>
+            {{category_count}}
+        </h1>
+
+    </div>
+
+    <div style="
+        background:white;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    ">
+
+        <h3>
+            🚚 Suppliers
+        </h3>
+
+        <h1>
+            {{supplier_count}}
+        </h1>
+
+    </div>
+
+    <div style="
+        background:white;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    ">
+
+       <a href="{% url 'user_list' %}" style="
+        text-decoration:none;
+        color:black;
+    ">
+
+        <h3>
+            👤 Users
+        </h3>
+
+    </a>
+
+        <h1>
+            {{user_count}}
+        </h1>
+    <!-- <h2>Users</h2>
+
+   <table>
+
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+    </tr>
+
+    {% for user in users %}
+
+    <tr>
+
+        <td>{{ user.id }}</td>
+
+        <td>{{ user.username }}</td>
+
+        <td>{{ user.email }}</td>
+
+        <td>{{ user.users_role }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table> -->
+    </div>
+
+</div>
+
+{% endblock %}

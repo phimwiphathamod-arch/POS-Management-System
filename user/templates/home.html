@@ -1,0 +1,170 @@
+{% extends 'base_user.html' %}
+
+{% block content %}
+
+<div style="max-width:1400px;margin:auto;">
+
+    <!-- Banner -->
+    <div class="banner">
+        <h1>🛒 Welcome to My Shop</h1>
+        <p>เลือกซื้อสินค้าคุณภาพดี ราคาพิเศษ</p>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+
+        <a href="{% url 'products' %}"
+           class="dashboard-card">
+
+            <h3>📦 Products</h3>
+            <h1>{{ product_count }}</h1>
+
+        </a>
+
+        <a href="{% url 'category_products' 1 %}"
+           class="dashboard-card">
+
+            <h3>📂 Categories</h3>
+            <h1>{{ category_count }}</h1>
+
+        </a>
+
+        <a href="#"
+           class="dashboard-card">
+
+            <h3>🏷 Brands</h3>
+            <h1>{{ brand_count }}</h1>
+
+        </a>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            placeholder="🔍 ค้นหาสินค้า...">
+
+    </div>
+
+    <h2 style="margin-bottom:25px;">
+        📦 สินค้าทั้งหมด
+    </h2>
+
+    <div class="product-grid">
+
+    {% for product in products %}
+
+        <div class="product-card">
+
+            {% if product.image %}
+
+                <img src="{{ product.image.url }}">
+
+            {% else %}
+
+                <div style="
+                    height:190px;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    background:#eee;
+                    color:#888;
+                ">
+                    No Image
+                </div>
+
+            {% endif %}
+
+            <div class="product-body">
+
+                <h3>{{ product.product_name }}</h3>
+
+                <p style="color:#666;margin:10px 0;">
+                    {{ product.category.categ_name }}
+                </p>
+
+                <p>
+                    Brand :
+                    {{ product.brand.brand_name }}
+                </p>
+
+                <p style="margin:10px 0;">
+
+                {% if product.stock_qty == 0 %}
+
+                    <span class="badge bg-danger">
+                        หมด
+                    </span>
+
+                {% elif product.stock_qty <= 5 %}
+
+                    <span class="badge bg-warning text-dark">
+                        เหลือ {{ product.stock_qty }} ชิ้น
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-success">
+                        คงเหลือ {{ product.stock_qty }} ชิ้น
+                    </span>
+
+                {% endif %}
+
+                </p>
+
+                <h2 style="color:#6d28d9;">
+                    ฿{{ product.sell_price }}
+                </h2>
+
+                {% if product.stock_qty > 0 %}
+
+                    <a href="{% url 'add_to_cart' product.id %}"
+                       class="btn-cart">
+
+                        🛒 เพิ่มลงตะกร้า
+
+                    </a>
+
+                {% else %}
+
+                    <div style="
+                        margin-top:15px;
+                        padding:12px;
+                        text-align:center;
+                        border-radius:10px;
+                        background:#6c757d;
+                        color:white;
+                    ">
+                        สินค้าหมด
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div style="
+            grid-column:1/-1;
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            text-align:center;
+        ">
+
+            <h3>📦 ยังไม่มีสินค้าในระบบ</h3>
+
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

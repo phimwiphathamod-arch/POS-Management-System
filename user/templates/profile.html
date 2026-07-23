@@ -1,0 +1,178 @@
+{% extends 'base_user.html' %}
+
+{% block content %}
+
+<div style="
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
+">
+
+    <div style="
+    background:rgba(107, 103, 107, 0.186);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+">
+
+        <!-- Cover -->
+
+        <div style="
+            height:180px;
+            background:linear-gradient(
+                135deg,
+                #453d44e0,
+                #4f414b8a
+            );
+        ">
+        </div>
+
+        <!-- Avatar -->
+
+        <div style="
+            text-align:center;
+            margin-top:-60px;
+        ">
+
+            <div style="
+                width:120px;
+                height:120px;
+                margin:auto;
+                border-radius:50%;
+                background:white;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-size:55px;
+                box-shadow:0 5px 15px rgba(0,0,0,0.15);
+            ">
+                👤
+            </div>
+
+            <h2 style="
+                margin-top:15px;
+            ">
+                {{ user.first_name }} {{ user.last_name }}
+            </h2>
+
+            <p style="
+                color:rgb(0, 0, 0);
+            ">
+                @{{ user.username }}
+            </p>
+
+        </div>
+
+        <!-- Info -->
+
+        <div style="
+            padding:40px;
+        ">
+
+            <div style="
+                display:grid;
+                grid-template-columns:repeat(2,1fr);
+                gap:20px;
+            ">
+
+            <div style="
+                background:rgba(255,255,255,0.2);
+                border:1px solid rgba(255,255,255,0.15);
+                color:white;
+                padding:15px;
+                border-radius:12px;
+           ">
+                    <strong>Email</strong>
+                    <p>{{ user.email }}</p>
+                </div>
+
+                <div style="
+                background:rgba(255,255,255,0.2);
+                border:1px solid rgba(255,255,255,0.15);
+                color:white;
+                padding:15px;
+                border-radius:12px;
+           ">
+                    <strong>Phone</strong>
+                    <p>{{ user.phone|default:"-" }}</p>
+                </div>
+
+                <div style="
+                background:rgba(255,255,255,0.2);
+                border:1px solid rgba(255,255,255,0.15);
+                color:white;
+                padding:15px;
+                border-radius:12px;
+           ">
+                    <strong>Role</strong>
+                    <p>{{ user.users_role }}</p>
+                </div>
+
+                <div style="
+                background:rgba(255,255,255,0.2);
+                border:1px solid rgba(255,255,255,0.15);
+                color:white;
+                padding:15px;
+                border-radius:12px;
+           ">
+                    <strong>Status</strong>
+
+                    <p style="
+                        color:green;
+                        font-weight:bold;
+                    ">
+                        {{ user.user_status }}
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div style="
+                margin-top:35px;
+                display:flex;
+                gap:15px;
+                justify-content:center;
+            ">
+
+                <a
+                    href="{% url 'update_user' user.id %}"
+                    style="
+                        background:#ffac2783;
+                        color:rgb(255, 255, 255);
+                        text-decoration:none;
+                        padding:14px 25px;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    แก้ไขโปรไฟล์
+                </a>
+
+                <a
+                    href="{% url 'home' %}"
+                    style="
+                        background:#e5e7eb;
+                        color:#333;
+                        text-decoration:none;
+                        padding:14px 25px;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    กลับ
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

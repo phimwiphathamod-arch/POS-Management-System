@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            display:flex;
+            background:#f5f6fa;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width:250px;
+
+            height:100vh;
+
+            background:#1e293b;
+
+            color:white;
+
+            padding:20px;
+
+            position:fixed;
+
+        }
+
+        .sidebar h2{
+
+            text-align:center;
+
+            margin-bottom:30px;
+
+        }
+
+        .sidebar a{
+
+            display:block;
+
+            color:white;
+
+            text-decoration:none;
+
+            padding:15px;
+
+            margin-bottom:10px;
+
+            border-radius:10px;
+
+            transition:0.3s;
+
+        }
+
+        .sidebar a:hover{
+
+            background:#334155;
+
+        }
+
+        /* CONTENT */
+
+        .content{
+
+            margin-left:250px;
+
+            width:100%;
+
+            padding:30px;
+
+        }
+
+        /* TOPBAR */
+
+        .topbar{
+
+            background:white;
+
+            padding:20px;
+
+            border-radius:15px;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+            margin-bottom:30px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>
+            POS SYSTEM
+        </h2>
+
+        <a href="/dashboard/">
+            🏠 Dashboard
+        </a>
+
+        <a href="/admin/user/product/">
+            📦 Products
+        </a>
+
+        <a href="/admin/user/category/">
+            📂 Categories
+        </a>
+
+        <a href="/admin/user/supplier/">
+            🚚 Suppliers
+        </a>
+
+        <a href="/admin/user/inventory/">
+            📊 Inventory
+        </a>
+
+        <a href="{% url 'user_list' %}" style="
+    text-decoration:none;
+    color:white;
+">
+            👤 Users
+        </a>
+
+        <a href="/admin/">
+            ⚙️ Admin Panel
+        </a>
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+        <div class="topbar">
+
+            <h2>
+                ระบบจัดการร้านค้า
+            </h2>
+
+        </div>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+</body>
+
+</html>
