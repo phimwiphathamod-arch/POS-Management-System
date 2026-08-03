@@ -6,7 +6,7 @@
 
 ### หน้า Home
 
-![Homepage Preview](docs/images/home-preview.svg)
+<img width="1502" height="737" alt="image" src="https://github.com/user-attachments/assets/768b9b01-774e-4664-9d3a-774c27a15c81" />
 
 ### หน้า Products
 
