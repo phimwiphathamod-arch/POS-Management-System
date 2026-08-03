@@ -13,7 +13,7 @@
 <img width="1523" height="638" alt="image" src="https://github.com/user-attachments/assets/3e83c60f-c19f-4128-8a0a-b4f2a8ff36f2" />
 
 ### หน้า Cart
-![Uploading image.png…]()
+<img width="1498" height="730" alt="image" src="https://github.com/user-attachments/assets/7ea57eea-a4db-47c7-8144-f682b117a963" />
 
 
 ## ฟีเจอร์หลัก
